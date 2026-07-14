@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+
+/* Contract page layout modifications */
+.contract-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+.contract-main-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  color: var(--text-primary);
+}
+
+.contract-intro-box {
+  background-color: var(--accent-gold-light);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+  border-radius: var(--radius-sm);
+}
+
+.contract-intro-box h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--accent-bronze);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.contract-intro-box p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Legal paper document style */
+.contract-document {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 40px 30px;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-height: 500px;
+  overflow-y: scroll;
+  border-radius: var(--radius-sm);
+}
+
+.contract-document h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.contract-meta-section,
+.contract-clause-section {
+  margin-bottom: 30px;
+}
+
+.contract-clause-section p, 
+.contract-meta-section p {
+  margin-bottom: 12px;
+}
+
+/* Custom scrollbar for document reader */
+.contract-document::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contract-document::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 4px;
+}
+
+.contract-document::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.contract-document::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Execution card & signature pad styling */
+.contract-sig-card {
+  padding: 30px;
+}
+.canvas-container {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: inset 0 1px 3px rgba(42, 42, 42, 0.02);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.canvas-container:hover {
+  border-color: var(--accent-gold);
+}
+
+.canvas-container:focus-within,
+.canvas-container.drawing-active {
+  border-color: var(--accent-gold-dark);
+  box-shadow: 0 0 0 4px rgba(197, 168, 128, 0.15);
+}
+
+#sig-canvas {
+  width: 100%;
+  height: 180px;
+  display: block;
+  cursor: crosshair;
+  touch-action: none; /* prevent scrolling when signing on touch screens */
+}
+
+.sig-date-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Tabs and Type-Signature Option styling */
+.sig-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.sig-tab-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition-fast);
+}
+
+.sig-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.sig-tab-btn.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-gold-dark);
+}
+
+.sig-type-container {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.4s var(--transition-normal);
+}
+
+.sig-draw-container {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s var(--transition-normal);
+}
+
+.sig-type-preview {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Allura', 'Brush Script MT', cursive;
+  font-size: 3rem;
+  color: #1c1c1c;
+  padding: 20px;
+  text-align: center;
+  box-shadow: inset 0 1px 3px rgba(42, 42, 42, 0.02);
+  overflow: hidden;
+  user-select: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.sig-type-preview:hover {
+  border-color: var(--accent-gold);
+}
+
+/* Responsive adjustments for Contract Page */
+@media (max-width: 600px) {
+  .contract-wrapper {
+    padding: 20px 12px;
+  }
+  
+  .proposal-brand {
+    margin-bottom: 24px !important;
+    text-align: center;
+  }
+  
+  .contract-main-title {
+    font-size: 1.5rem;
+  }
+  
+  .contract-intro-box {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .contract-intro-box h3 {
+    font-size: 1.15rem;
+  }
+  
+  .contract-intro-box p {
+    font-size: 0.78rem;
+  }
+  
+  .contract-document {
+    padding: 24px 16px;
+    margin-bottom: 24px;
+    max-height: 400px;
+  }
+  
+  .contract-document h4 {
+    font-size: 1rem;
+  }
+  
+  .contract-sig-card {
+    padding: 20px 16px;
+  }
+  
+  #sig-canvas {
+    height: 140px; /* slightly shorter on mobile to fit the viewport nicely */
+  }
+  
+  .sig-type-preview {
+    height: 140px;
+    font-size: 2rem; /* smaller font so typed name fits without horizontal scroll */
+  }
+  
+  .sig-tab-btn {
+    font-size: 0.7rem;
+    padding: 8px 10px;
+  }
+}

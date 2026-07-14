@@ -1,0 +1,43 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "server/**",
+      "task.md",
+      "implementation_plan.md",
+      "walkthrough.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/login",
+        "destination": "/login.html"
+      },
+      {
+        "source": "/proposal/*/contract",
+        "destination": "/contract.html"
+      },
+      {
+        "source": "/proposal/*/invoice",
+        "destination": "/invoice.html"
+      },
+      {
+        "source": "/proposal/*",
+        "destination": "/proposal.html"
+      },
+      {
+        "source": "/",
+        "destination": "/login.html"
+      },
+      {
+        "source": "**",
+        "destination": "/dashboard.html"
+      }
+    ]
+  }
+}

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View your customized property styling proposal from Sale by Design Homes.">
+  <title>Property Styling Proposal | Sale by Design Homes</title>
+  <link rel="shortcut icon" href="/images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/proposal.css">
+</head>
+<body>
+
+  <!-- LOADING STATE -->
+  <div id="proposal-loading" class="proposal-loading-overlay">
+    <div class="loading-content">
+      <span class="spinner"></span>
+      <p>Preparing styling proposal...</p>
+    </div>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div id="proposal-error" class="proposal-error-card" style="display: none;">
+    <div class="error-icon">!</div>
+    <h3>Proposal Unavailable</h3>
+    <p>The proposal link you followed might be incorrect or expired. Please contact our styling team if you believe this is an error.</p>
+  </div>
+
+  <!-- MAIN PROPOSAL CONTENT (Initially Hidden) -->
+  <div id="proposal-content" style="display: none;">
+    
+    <!-- LUXURY BRAND HEADER NAVIGATION -->
+    <nav class="proposal-nav">
+      <div class="nav-links left">
+        <a href="#proposal-package-section" class="nav-link-item">Proposal</a>
+      </div>
+      <div class="nav-logo">
+        <span class="logo-main">Sale by Design</span>
+        <span class="logo-sub">Homes</span>
+      </div>
+      <div class="nav-links right">
+        <a id="nav-contract-link" href="#" class="nav-link-item">Contract</a>
+        <a id="nav-invoice-link" href="#" class="nav-link-item">Invoice</a>
+      </div>
+    </nav>
+
+    <!-- SECTION 1: HERO COVER (PAGE 1) -->
+    <section class="section-hero">
+      <div class="hero-bg-placeholder">
+        <!-- Blank background image placeholder -->
+      </div>
+      <div class="hero-overlay-content">
+        <h2 class="hero-tagline">16+ years as the go to staging partner for</h2>
+        <h1 class="hero-partners">Real Estate Agents, Vendors, Builders, Home Owners, Developers, Investors</h1>
+        <div class="hero-divider"></div>
+        <h3 class="hero-heading-bottom">Property <em>styling</em> proposal for</h3>
+        <div class="hero-underline"></div>
+        <div class="hero-proposal-title" id="prop-display-title-cover">3 Bedroom | Full Styling Package</div>
+        <div class="hero-proposal-date" id="prop-display-date">Date: —</div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTRO PRESENTATION (PAGE 2) -->
+    <section class="section-intro">
+      <div class="section-container">
+        <h2 class="section-serif-title">Presenting <em>your home</em> at its best</h2>
+        <div class="intro-body-text">
+          <p>With over 16 years of experience, we understand that every property is unique. Our styling approach is tailored to highlight the strengths of your home, maximise its market appeal and create a memorable first impression for potential buyers.</p>
+          <p>This proposal outlines our recommended staging package, selected furnishings and styling direction. We look forward to helping you present your property at its very best and achieve an outstanding result.</p>
+          <p>Thank you for considering Sale By Design Homes.</p>
+        </div>
+        
+        <!-- Portrait Staging Images -->
+        <div class="portrait-placeholder-grid">
+          <div class="portrait-placeholder-card">
+            <img src="/images/A (1).jpg" alt="Staging Portrait 1" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="portrait-placeholder-card">
+            <img src="/images/A (2).jpg" alt="Staging Portrait 2" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="portrait-placeholder-card">
+            <img src="/images/A (3).jpg" alt="Staging Portrait 3" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FULL STYLING PACKAGE (PAGE 3) -->
+    <section class="section-package" id="proposal-package-section">
+      <div class="section-container">
+        <h2 class="section-package-title">Full <em>styling</em> package</h2>
+        
+        <!-- White Document Card Layout -->
+        <div class="package-document-card">
+          <header class="package-card-header">
+            <div class="package-card-logo">
+              <span class="card-logo-main">Sale by Design</span>
+              <span class="card-logo-sub">Homes</span>
+            </div>
+            <h3 class="package-card-subtitle" id="prop-display-subtitle">3 BEDROOM, 1 LIVING AREA</h3>
+          </header>
+          
+          <div class="package-card-body">
+            <!-- Inclusions Block -->
+            <div class="package-inclusions-container" id="prop-display-inclusions-section">
+              <h4 class="package-block-title">Service Inclusions</h4>
+              <ul class="package-inclusions-list" id="prop-display-inclusions">
+                <!-- Dynamically populated -->
+              </ul>
+            </div>
+            
+            <!-- Room Breakdown Block -->
+            <div class="package-rooms-container">
+              <h4 class="package-block-title">Styling Details &amp; Room Breakdown</h4>
+              <div class="package-rooms-list" id="prop-display-rooms">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card Footer (Price Block) -->
+          <footer class="package-card-footer">
+            <span class="total-label">Total</span>
+            <span class="total-value" id="prop-display-price">$0.00</span>
+            <span class="total-tax" id="prop-display-tax">INCL. GST</span>
+          </footer>
+        </div>
+        
+        <p class="package-disclaimer-bottom">Please note the above listing of furniture and accessories etc should be treated as a guide and may be changed following further assessment by the team.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: DETAILS FORM & NEXT STEPS (PAGE 4) -->
+    <section class="section-form-steps">
+      <div class="section-container">
+        
+        <!-- Two-column split layout for form -->
+        <div class="form-split-layout">
+          <!-- Left: Vertical Image Placeholder -->
+          <div class="form-image-column">
+            <div class="vertical-placeholder-box">
+              <span class="placeholder-tag">Vertical Image</span>
+            </div>
+          </div>
+          
+          <!-- Right: Details Form -->
+          <div class="form-details-column" id="proposal-approval-section">
+            <h2 class="form-serif-title">Property <em>details</em> form:</h2>
+            
+            <form id="client-approval-form" class="custom-proposal-form">
+              <div class="form-group-single">
+                <label for="client-first-name">First Name *</label>
+                <input type="text" id="client-first-name" class="form-control-custom" placeholder="e.g. Haitham" required>
+              </div>
+              
+              <div class="form-group-single">
+                <label for="client-last-name">Last Name *</label>
+                <input type="text" id="client-last-name" class="form-control-custom" placeholder="e.g. Gunawardana" required>
+              </div>
+              
+              <div class="form-group-single">
+                <label for="client-phone">Phone Number *</label>
+                <input type="tel" id="client-phone" class="form-control-custom" placeholder="e.g. 0452 401 170" required>
+              </div>
+              
+              <div class="form-group-single">
+                <label for="client-email">Email Address *</label>
+                <input type="email" id="client-email" class="form-control-custom" placeholder="e.g. client@example.com" required>
+              </div>
+              
+              <div class="form-group-single">
+                <label for="client-address-1">Billing Address Line 1 *</label>
+                <input type="text" id="client-address-1" class="form-control-custom" placeholder="e.g. U 2 / 6 Grandview St" required>
+              </div>
+              
+              <div class="form-group-single">
+                <label for="client-address-2">Billing Address Line 2</label>
+                <input type="text" id="client-address-2" class="form-control-custom" placeholder="e.g. Apartment, suite, unit (optional)">
+              </div>
+              
+              <div class="form-row-three-custom">
+                <div class="form-group-custom">
+                  <label for="client-city">City *</label>
+                  <input type="text" id="client-city" class="form-control-custom" placeholder="e.g. Glenroy" required>
+                </div>
+                <div class="form-group-custom">
+                  <label for="client-state">State *</label>
+                  <input type="text" id="client-state" class="form-control-custom" placeholder="e.g. VIC" required>
+                </div>
+                <div class="form-group-custom">
+                  <label for="client-postcode">Postcode *</label>
+                  <input type="text" id="client-postcode" class="form-control-custom" placeholder="e.g. 3046" required>
+                </div>
+              </div>
+              
+              <button type="submit" id="submit-approval-btn" class="btn-submit-proposal">
+                <span id="accept-btn-text">SUBMIT AND NEXT</span>
+                <span id="accept-btn-spinner" class="spinner" style="display: none; border-top-color: white; width: 16px; height: 16px; margin: 0 auto;"></span>
+              </button>
+            </form>
+          </div>
+          
+          <!-- Already Approved Banner (shows if proposal already approved in place of form) -->
+          <div class="approved-status-column" id="approved-banner-section" style="display: none;">
+            <div class="approved-check-circle">✓</div>
+            <h3 class="approved-status-title">Proposal Approved</h3>
+            <p class="approved-status-text">This styling proposal was approved by <strong id="approved-by-name">Client</strong> on <span id="approved-on-date">Date</span>.</p>
+            <p class="approved-status-text" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-secondary);">The service agreement has been executed. You can view the signature details or access the invoice below:</p>
+            <div id="approved-action-container" style="margin-top: 25px; display: flex; flex-direction: column; gap: 12px; width: 100%;">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Next Steps Banner (Olive block) -->
+        <div class="next-steps-banner">
+          <h2 class="steps-title">Next <em>steps</em></h2>
+          <p class="steps-subtitle">To get started, we simply ask that the following steps are completed:</p>
+          
+          <div class="steps-timeline-grid">
+            <div class="step-timeline-card">
+              <span class="step-number">1. REVIEW THE PROPOSAL</span>
+              <p class="step-text">Take a moment to review the recommended styling package and confirm your details.</p>
+            </div>
+            <div class="step-timeline-card">
+              <span class="step-number">2. CONFIRM &amp; SIGN</span>
+              <p class="step-text">When you're ready to proceed, complete the service agreement via electronic signature.</p>
+            </div>
+            <div class="step-timeline-card">
+              <span class="step-number">3. FINALISE PAYMENT</span>
+              <p class="step-text">An invoice will be issued once the agreement has been signed.</p>
+            </div>
+            <div class="step-timeline-card">
+              <span class="step-number">4. SCHEDULING</span>
+              <p class="step-text">Our team will be in touch to confirm your booking and guide you through the remaining steps.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Landscape Empty Placeholders -->
+        <div class="landscape-placeholder-grid">
+          <div class="landscape-placeholder-card"><div class="aspect-ratio-shield">Landscape Image</div></div>
+          <div class="landscape-placeholder-card"><div class="aspect-ratio-shield">Landscape Image</div></div>
+          <div class="landscape-placeholder-card"><div class="aspect-ratio-shield">Landscape Image</div></div>
+        </div>
+        
+        <!-- Testimonials Section -->
+        <div class="testimonials-container">
+          <h2 class="testimonials-title">What <em>clients</em> say</h2>
+          
+          <div class="testimonial-slider-wrap">
+            <button class="slider-nav-btn prev" type="button" aria-label="Previous Testimonial">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <div class="testimonial-slide active">
+              <blockquote class="testimonial-quote">"Sale by Design staged our house for sale and we were thrilled with the result. Professional, well-planned styling with furniture and accessories that perfectly complemented our home. Highly recommend"</blockquote>
+              <cite class="testimonial-author">— Rosanna Velevski</cite>
+            </div>
+            <button class="slider-nav-btn next" type="button" aria-label="Next Testimonial">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: FAQ & BOTTOM BANNER (PAGE 5) -->
+    <section class="section-faq-banner">
+      <div class="section-container">
+        <h2 class="faq-section-title">Frequently <em>asked</em> questions</h2>
+        
+        <div class="faq-accordion-wrapper">
+          <div class="faq-item active">
+            <button class="faq-trigger" type="button">
+              <span>WHY STAGE MY HOME?</span>
+              <span class="faq-icon">&minus;</span>
+            </button>
+            <div class="faq-content" style="display: block;">
+              <p>The real estate industry is incredibly competitive and first impressions are priceless! Buyers who walk into an empty house, generally cannot see themselves living in the property, as it is not furnished thus can come across unappealing. Furnished homes offer buyers a sense of belonging and homeliness in a property. For this reason, professionally staged homes have a significant advantage in a crowded market. On average, professionally staged homes sell for 7.5% to 12.5% than those properties that are not staged.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-trigger" type="button">
+              <span>WHAT IS A FREE QUOTE?</span>
+              <span class="faq-icon">&plus;</span>
+            </button>
+            <div class="faq-content">
+              <p>A free quote is a detailed estimation provided by our team outlining the recommended staging package, room-by-room items, and pricing customized for your property campaign without any cost or obligation.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-trigger" type="button">
+              <span>HOW DO I GET A FREE QUOTE?</span>
+              <span class="faq-icon">&plus;</span>
+            </button>
+            <div class="faq-content">
+              <p>Simply contact us via phone or email, or submit the request form on our portal. We will arrange a brief site visit or analyze your floor plans to prepare your customized proposal.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-trigger" type="button">
+              <span>HOW LONG CAN I KEEP THE FURNITURE?</span>
+              <span class="faq-icon">&plus;</span>
+            </button>
+            <div class="faq-content">
+              <p>Our standard packages include a six-week hire period, which covers a standard four-week marketing campaign plus one week for photography/setup and one week for scheduled collection. Extensions are available on a weekly basis.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-trigger" type="button">
+              <span>WHAT HAPPENS IF THERE ARE DAMAGES TO MY PROPERTY?</span>
+              <span class="faq-icon">&plus;</span>
+            </button>
+            <div class="faq-content">
+              <p>Sale by Design Homes is fully insured. Our professional delivery and installation teams exercise the utmost care during setup and collection to ensure your property remains pristine and undamaged.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-trigger" type="button">
+              <span>WHERE CAN I FIND A PORTFOLIO OF YOUR WORK?</span>
+              <span class="faq-icon">&plus;</span>
+            </button>
+            <div class="faq-content">
+              <p>You can view our portfolio, case studies, and latest property transformations on our official website or request a copy of our style lookbook from your campaign styling consultant.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Large Bottom Banner Placeholder -->
+        <div class="bottom-banner-placeholder">
+          <div class="aspect-ratio-shield">Full-Width Bottom Image Banner</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Proposal Acceptance Modal (Triggered on submit) -->
+  <div class="client-modal" id="acceptance-modal">
+    <div class="client-modal-content">
+      <div class="client-modal-icon">✓</div>
+      <h3 class="client-modal-title">Proposal Approved</h3>
+      <p class="client-modal-text">Thank you for approving your property styling proposal! We have registered your client details, and you will now be redirected to the service agreement contract signature page.</p>
+      <button id="close-acceptance-btn" class="btn btn-gold" style="padding: 12px 36px; font-family: var(--font-sans); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Proceed to Agreement</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK Compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+  <script src="/js/firebase-init.js"></script>
+  <script src="/js/proposal.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin dashboard for managing and creating property styling proposals.">
+  <title>Dashboard | Sale by Design Homes Portal</title>
+  <link rel="shortcut icon" href="/images/logo.svg">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="brand" style="display: flex; align-items: center; gap: 16px;">
+        <img src="/images/logo.svg" alt="Sale by Design Homes Logo" style="height: 50px; width: auto;">
+        <div style="border-left: 1px solid var(--border-color); padding-left: 16px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-family: var(--font-sans); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-secondary); line-height: 1;">Proposal Portal</div>
+        </div>
+      </div>
+      <div class="user-controls" style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <!-- Xero Status Widget -->
+        <div id="xero-connection-status" class="xero-status-widget" style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; padding: 6px 12px; background-color: rgba(0, 183, 241, 0.06); border: 1px solid rgba(0, 183, 241, 0.15); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-sans);">
+          <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #ff9800; transition: background-color 0.3s ease;" id="xero-status-dot"></span>
+          <span id="xero-status-text" style="font-weight: 500;">Checking Xero...</span>
+          <a href="http://localhost:5000/auth/connect" id="xero-connect-btn" class="btn btn-outline btn-sm" style="font-size: 0.65rem; padding: 3px 8px; text-decoration: none; margin-left: 4px; display: none; line-height: 1; border-color: #00b7f1; color: #00b7f1;">Connect</a>
+          <button id="xero-disconnect-btn" class="btn btn-outline btn-sm" style="font-size: 0.65rem; padding: 3px 8px; text-decoration: none; margin-left: 4px; display: none; line-height: 1; color: var(--accent-danger); border-color: rgba(211, 47, 47, 0.3);">Disconnect</button>
+        </div>
+        <span class="username" id="display-user">Logged in as admin</span>
+        <button id="logout-btn" class="btn btn-outline btn-sm" style="padding: 8px 16px; font-size: 0.75rem;">Log Out</button>
+      </div>
+    </header>
+
+    <!-- Actions Bar -->
+    <div class="dashboard-actions">
+      <h2 class="section-title">Styling Proposals</h2>
+      <button id="new-proposal-btn" class="btn btn-primary">+ Create Proposal</button>
+    </div>
+
+    <!-- Proposals Grid -->
+    <div class="proposals-grid" id="proposals-grid-container">
+      <!-- Loading indicator -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 40px;" id="loading-indicator">
+        <span class="spinner" style="border-top-color: var(--accent-gold); width: 32px; height: 32px; border-width: 3px;"></span>
+        <p style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">Loading proposals...</p>
+      </div>
+      
+      <!-- Proposals list will be dynamically rendered here -->
+    </div>
+  </div>
+
+  <!-- Proposal Modal (Create / Edit) -->
+  <div class="modal-overlay" id="proposal-modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title-text">Create Proposal</h3>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="proposal-form">
+          <input type="hidden" id="proposal-id">
+          
+          <!-- Basic Information -->
+          <div class="form-group">
+            <label for="prop-title">Proposal Title</label>
+            <input type="text" id="prop-title" class="form-control" placeholder="e.g. 3 Bedroom | Full Styling Package" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="prop-subtitle">Subtitle / Description</label>
+            <input type="text" id="prop-subtitle" class="form-control" placeholder="e.g. Full Styling Package - 3 Bedroom, 1 Living Area">
+          </div>
+          
+          <!-- Client Information -->
+          <div class="row">
+            <div class="form-group">
+              <label for="prop-client-name">Client Name *</label>
+              <input type="text" id="prop-client-name" class="form-control" placeholder="e.g. Haitham" required>
+            </div>
+            <div class="form-group">
+              <label for="prop-client-email">Client Email *</label>
+              <input type="email" id="prop-client-email" class="form-control" placeholder="e.g. client@example.com" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="prop-price">Total Price ($)</label>
+              <input type="text" id="prop-price" class="form-control" placeholder="e.g. 2,970.00" required>
+            </div>
+            <div class="form-group">
+              <label for="prop-tax">Tax Label</label>
+              <input type="text" id="prop-tax" class="form-control" placeholder="e.g. incl. GST" value="incl. GST">
+            </div>
+          </div>
+
+          <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 15px; margin-bottom: 5px;">
+            <input type="checkbox" id="prop-send-email" style="width: 18px; height: 18px; cursor: pointer; margin: 0;" checked>
+            <label for="prop-send-email" style="cursor: pointer; margin-bottom: 0; font-weight: normal; color: var(--text-primary); font-size: 0.9rem;">Send email notification to client</label>
+          </div>
+          
+          <!-- Inclusions Section -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <h4 class="editor-section-title">Service Inclusions</h4>
+              <button type="button" id="add-inclusion-btn" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.75rem;">+ Add Inclusion</button>
+            </div>
+            <div class="inclusions-list" id="inclusions-editor-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+          
+          <!-- Rooms Section -->
+          <div class="editor-section">
+            <div class="editor-section-header">
+              <h4 class="editor-section-title">Rooms & Items Breakdown</h4>
+              <button type="button" id="add-room-btn" class="btn btn-outline" style="padding: 6px 12px; font-size: 0.75rem;">+ Add Room</button>
+            </div>
+            <div class="rooms-list" id="rooms-editor-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-cancel-btn">Cancel</button>
+        <button type="button" class="btn btn-primary" id="modal-save-btn">Save Proposal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toast-banner">Link copied to clipboard!</div>
+
+  <!-- Firebase SDK Compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+  <script src="/js/firebase-init.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

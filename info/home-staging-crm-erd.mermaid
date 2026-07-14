@@ -1,0 +1,111 @@
+erDiagram
+    CLIENT {
+        string name
+        string primary_email
+        string secondary_emails
+        string lead_source
+        string referring_agent_id
+    }
+    AGENT {
+        string name
+        string agency
+        string phone
+        string email
+    }
+    QUOTE {
+        string recipient_type
+        string status
+        string bill_to
+        string cc_agent_on_send
+        string lost_reason
+    }
+    QUOTE_ROOM {
+        string room_type
+        string label
+        string notes
+    }
+    QUOTE_LINE_ITEM {
+        string item_name
+        string attribute
+        int quantity
+        decimal unit_price
+    }
+    ROOM_TEMPLATE {
+        string name
+        string default_items
+    }
+    JOB {
+        string status
+        date installation_date
+        boolean is_tbc
+        string bill_to
+        date hire_start_date
+        date hire_end_date
+        string extension_type
+        boolean property_sold
+    }
+    ITEM_TYPE {
+        string name
+        string category
+        string room_tags
+        string style_tags
+        int total_quantity
+        decimal replacement_value
+        int useful_life_uses
+    }
+    LOCATION_LEDGER {
+        string location
+        int quantity
+    }
+    STAFF {
+        string name
+        string role
+        string phone
+        decimal hourly_rate
+    }
+    VEHICLE {
+        string name
+        string rego
+        decimal day_rate
+    }
+    RUN {
+        date run_date
+    }
+    KEY {
+        string status
+        string current_holder
+    }
+    PHOTO {
+        string type
+        string url
+    }
+    CHECKLIST_INSTANCE {
+        string type
+        string status
+        datetime arrived_at
+        datetime departed_at
+    }
+    DAMAGE_RECORD {
+        decimal repair_cost
+        boolean recharged_to_client
+    }
+
+    CLIENT ||--o{ QUOTE : "requests"
+    AGENT ||--o{ CLIENT : "refers"
+    AGENT ||--o{ QUOTE : "receives/referred on"
+    QUOTE ||--o{ QUOTE_ROOM : "contains"
+    ROOM_TEMPLATE ||--o{ QUOTE_ROOM : "seeds"
+    QUOTE_ROOM ||--o{ QUOTE_LINE_ITEM : "contains"
+    QUOTE ||--o| JOB : "converts to"
+    CLIENT ||--o{ JOB : "has"
+    AGENT ||--o{ JOB : "linked to"
+    JOB ||--o{ PHOTO : "has"
+    JOB ||--o{ KEY : "has"
+    JOB ||--o{ CHECKLIST_INSTANCE : "has"
+    JOB ||--o{ DAMAGE_RECORD : "may have"
+    JOB }o--o{ ITEM_TYPE : "allocates (via sourcing)"
+    ITEM_TYPE ||--o{ LOCATION_LEDGER : "tracked by"
+    RUN ||--o{ JOB : "includes (as stops)"
+    RUN }o--|| VEHICLE : "uses"
+    RUN }o--o{ STAFF : "staffed by (crew)"
+    STAFF ||--o{ JOB : "assigned to (stylist/crew)"
